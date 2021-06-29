@@ -10,8 +10,7 @@ print("Status Code: ", file.status_code)
 
 counter = 0
 for Key in json_file['people']:
-  if counter == 5:
-    break
-  print(Key['name'])
-  counter += 1
-#print(file.json())
+    if counter == 5:
+        break
+    print(Key['name'])
+    counter += 1
