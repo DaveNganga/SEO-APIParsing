@@ -14,3 +14,4 @@ for Key in json_file['people']:
         break
     print(Key['name'])
     counter += 1
+    
