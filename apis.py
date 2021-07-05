@@ -5,7 +5,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 
 
-#Function to initiate communication with the spotify API
+# Function to initiate communication with the spotify API
 def spotipy_client():
     CLIENT_ID = "c4820cbbfb4b4bf68e69962fd1648da4"
     CLIENT_SECRET = "968c1ca80cc148e9b29310afab75300e"
@@ -20,8 +20,8 @@ def spotipy_client():
     print('The authentication response: ', auth_response)
     return auth_response
 
-  
-#Functino that shifts through the response and findes the access token
+
+# Functino that shifts through the response and findes the access token
 def response_to_accesstoken(response):
     auth_response_data = response.json()
     access_token = auth_response_data['access_token']
@@ -29,7 +29,7 @@ def response_to_accesstoken(response):
     return access_token
 
 
-#Function get information on a specific song: Sacrifices - dreamville
+# Function get information on a specific song: Sacrifices - dreamville
 def track_information(access_token):
     track_id = '7wTA0NKIm6T7nP2kaymU2a?si=55326fdadbb74623'
     BASE_URL = 'https://api.spotify.com/v1/'
@@ -42,16 +42,17 @@ def track_information(access_token):
     return data
 
 
-#Function to insert this ifomration into a local sql database
+# Function to insert this ifomration into a local sql database
 def data_to_sql(data):
-    information_data_frame = pd.DataFrame.from_dict([data], orient = 'columns')
+    information_data_frame = pd.DataFrame.from_dict([data], orient='columns')
     print(information_data_frame)
     engine = create_engine('mysql://root:codio@localhost/music')
-    information_data_frame.to_sql('SongInformation', con=engine, if_exists='replace', index=False)
+    information_data_frame.to_sql('SongInformation', con=engine, 
+                                  if_exists='replace', index=False)
 
 
 def main():
-    #A main function to call all the units together
+    # A main function to call all the units together
     Auth_Response = spotipy_client()
     Access_Token = response_to_accesstoken(Auth_Response)
     Track_Information = track_information(Access_Token)
