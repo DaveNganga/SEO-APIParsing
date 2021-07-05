@@ -10,7 +10,7 @@ class TestFileName(unittest.TestCase):
     def test_function2(self):
         output = spotipy_client()
         self.assertTrue((output is not None), 'Auth. response collected')
-        
+
     def test_function3(self):
         output_one = spotipy_client()
         output_two = response_to_accesstoken(output_one)
