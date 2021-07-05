@@ -1,3 +1,4 @@
+import random
 import requests
 import spotipy
 import pandas as pd
@@ -65,18 +66,36 @@ def data_to_sql(data):
         information_data_frame.to_sql('SongInformation', con=engine,
                                       if_exists='append', index=False)
         
-def data_to_visualization():
-    ypoints = np.array([3,4,5,6,-20,2,41,])
-    
-    plt.plot(ypoints, linestyle = 'dotted')
+def data_to_visualization(data):
+    temp = 0 
+    global name_list
+    name_list = ['Sacrifices - Dreamville','Niko Sawa - Sauti Sol','Festivel Minor - Gerry M Sextet']
+    for data_object in data:
+        ypoints = []
+        xpoints = []
+        for key, value in data_object.items():
+            if key in ('danceability','energy','loudness','tempo'):
+                ypoints.append(value)
+                xpoints.append(key)
+                yplotpoints = np.array(ypoints)
+                xplotpoints = np.array(xpoints)
+            
+        #plt.plot(data_object['key'], data_object.items())
+        plt.title('comparing songs')
+        plt.plot(xplotpoints,yplotpoints,
+                 color=(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1)), 
+                 label=name_list[temp])
+        plt.legend(loc="best")
+        temp+=1
+        
     plt.show()  
-  
-  
+
+
     # Main function to call all the units together
 if __name__ == '__main__':
     Auth_Response = spotipy_client()
     Access_Token = response_to_accesstoken(Auth_Response)
     Track_Information = track_information(Access_Token)
-    data_to_sql(Track_Information)
-    data_to_visualization()
+    #data_to_sql(Track_Information)
+    data_to_visualization(Track_Information)
 
