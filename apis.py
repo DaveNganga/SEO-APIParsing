@@ -22,8 +22,8 @@ def spotipy_client():
 #Functino that shifts through the response and findes the access token
 def response_to_accesstoken(response):
     auth_response_data = response.json()
-    access_token = response_data['access_token']
-    print('The access token: ',access_token)
+    access_token = auth_response_data['access_token']
+    print('The access token: ', access_token)
     return access_token
 
 #Function to Try and get information on a specific song: Sacrifices - dreamville
