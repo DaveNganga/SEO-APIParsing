@@ -1,7 +1,7 @@
 import requests
 import spotipy
 import pandas as pd
-import sqlalchemy 
+import sqlalchemy
 from sqlalchemy import create_engine
 
 
@@ -15,10 +15,12 @@ def spotipy_client():
     auth_response = requests.post(AUTH_URL, {
       'grant_type': 'client_credentials',
       'client_id': CLIENT_ID,
-      'client_secret': CLIENT_SECRET })
+      'client_secret': CLIENT_SECRET
+    })
     print('The authentication response: ', auth_response)
     return auth_response
 
+  
 #Functino that shifts through the response and findes the access token
 def response_to_accesstoken(response):
     auth_response_data = response.json()
@@ -26,7 +28,8 @@ def response_to_accesstoken(response):
     print('The access token: ', access_token)
     return access_token
 
-#Function to Try and get information on a specific song: Sacrifices - dreamville
+
+#Function get information on a specific song: Sacrifices - dreamville
 def track_information(access_token):
     track_id = '7wTA0NKIm6T7nP2kaymU2a?si=55326fdadbb74623'
     BASE_URL = 'https://api.spotify.com/v1/'
@@ -37,14 +40,15 @@ def track_information(access_token):
     data = r.json()
     print('The raw data: ', data)
     return data
-  
+
+
 #Function to insert this ifomration into a local sql database
 def data_to_sql(data):
     information_data_frame = pd.DataFrame.from_dict([data], orient = 'columns')
     print(information_data_frame)
     engine = create_engine('mysql://root:codio@localhost/music')
     information_data_frame.to_sql('SongInformation', con=engine, if_exists='replace', index=False)
-    
+
 
 def main():
     #A main function to call all the units together
