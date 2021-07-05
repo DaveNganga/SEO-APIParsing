@@ -4,7 +4,8 @@ import pandas as pd
 import sqlalchemy 
 from sqlalchemy import create_engine
 
-#Function to initiate communication with the spotify API and store a post response
+
+#Function to initiate communication with the spotify API
 def spotipy_client():
     CLIENT_ID = "c4820cbbfb4b4bf68e69962fd1648da4"
     CLIENT_SECRET = "968c1ca80cc148e9b29310afab75300e"
@@ -14,11 +15,10 @@ def spotipy_client():
     auth_response = requests.post(AUTH_URL, {
       'grant_type': 'client_credentials',
       'client_id': CLIENT_ID,
-      'client_secret': CLIENT_SECRET
-    })
+      'client_secret': CLIENT_SECRET })
     print('The authentication response: ', auth_response)
     return auth_response
-  
+
 #Functino that shifts through the response and findes the access token
 def response_to_accesstoken(response):
     auth_response_data = response.json()
@@ -35,7 +35,7 @@ def track_information(access_token):
     }
     r = requests.get(BASE_URL + 'audio-features/' + track_id, headers=headers)
     data = r.json()
-    print('The raw data: ',data)
+    print('The raw data: ', data)
     return data
   
 #Function to insert this ifomration into a local sql database
