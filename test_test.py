@@ -9,18 +9,18 @@ class TestFileName(unittest.TestCase):
         
     def test_function2(self):
         output = spotipy_client()
-        self.assertTrue((output is not None), 'An Authentication response has been collected')
+        self.assertTrue((output is not None), 'Authentication response collected')
         
     def test_function3(self):
         output_one = spotipy_client()
         output_two = response_to_accesstoken(output_one)
-        self.assertTrue((output_two is not None), 'An Access Token has been obtained')
+        self.assertTrue((output_two is not None), 'Access Token obtained')
         
     def test_function4(self):
         output_one = spotipy_client()
         output_two = response_to_accesstoken(output_one)
         output_three = track_information(output_two)
-        self.assertTrue((output_three is not None), 'Track information has been obtained')
+        self.assertTrue((output_three is not None), 'Track information collected')
 
         
 if __name__ == '__main__':

@@ -47,7 +47,7 @@ def data_to_sql(data):
     information_data_frame = pd.DataFrame.from_dict([data], orient='columns')
     print(information_data_frame)
     engine = create_engine('mysql://root:codio@localhost/music')
-    information_data_frame.to_sql('SongInformation', con=engine, 
+    information_data_frame.to_sql('SongInformation', con=engine,
                                   if_exists='replace', index=False)
 
 
@@ -57,6 +57,6 @@ def main():
     Access_Token = response_to_accesstoken(Auth_Response)
     Track_Information = track_information(Access_Token)
     data_to_sql(Track_Information)
-    
+
     if __name__ == '__main__':
         main()
