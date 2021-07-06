@@ -10,8 +10,8 @@ from sqlalchemy import create_engine
 
 # Function to initiate communication with the spotify API
 def spotipy_client():
-    CLIENT_ID = "c4820cbbfb4b4bf68e69962fd1648da4"
-    CLIENT_SECRET = "968c1ca80cc148e9b29310afab75300e"
+    CLIENT_ID = ""
+    CLIENT_SECRET = ""
 
     AUTH_URL = "https://accounts.spotify.com/api/token"
 
